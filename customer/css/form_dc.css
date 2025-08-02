@@ -1,0 +1,233 @@
+.findent{
+    margin-left: auto;
+    margin-right: auto;
+    height:auto;
+    width: 42.3em;
+}
+.find_card{
+    margin-left: auto;
+    margin-right: auto;
+    height:auto;
+    width: 45em;
+}
+.find_card_3{
+    margin-left: auto;
+    margin-right: auto;
+    height:auto;
+    width: 50em;
+}
+.find_card_2{
+    margin-left: auto;
+    margin-right: auto;
+    height:auto;
+    width: 47em;
+}
+
+.conteiner-form .currencies{
+    position: relative;
+    margin-top: 30px;
+    min-height: 280px;
+    background-color: #fff;
+}
+.conteiner-form .form_card{
+    position: relative;
+    margin-top: 5px;
+    min-height: 430px;
+    background-color: #fff;
+    overflow: auto;
+}
+.conteiner-form .form_cs{
+    position: relative;
+    margin-top: 16px;
+    min-height: 1017px;
+    background-color: #fff;
+    overflow: auto;
+}
+.conteiner-form .form_em{
+    position: relative;
+    margin-top: 16px;
+    min-height: 1154px;
+    background-color: #fff;
+    overflow: auto;
+}
+.conteiner-form .form_a{
+    position: relative;
+    margin-top: 16px;
+    min-height: 880px;
+    background-color: #fff;
+    overflow: auto;
+}
+.conteiner-form .form_filtr{
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    min-height: 400px;
+    background-color: #fff;
+    overflow: auto;
+}
+
+.conteiner-form form .form{
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
+}
+.conteiner-form form .form.second{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+form.secActive .form.second{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+form.secActive .form.first{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+}
+.conteiner-form form .title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
+.conteiner-form form .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+form .fields .input-field{
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+form .fields .input-field_2{
+    display: flex;
+    width: 20em;
+    flex-direction: column;
+    margin: 10px 25px;
+}
+
+.input-field_2 label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.input-field_2 input, select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.input-field_2 input :focus,
+.input-field_2 select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.input-field_2 select,
+.input-field_2 input[type="date"]{
+    color: #707070;
+}
+.input-field_2 input[type="date"]:valid{
+    color: #333;
+}
+
+
+.input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.input-field input, select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.input-field input :focus,
+.input-field select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.input-field select,
+.input-field input[type="date"]{
+    color: #707070;
+}
+.input-field input[type="date"]:valid{
+    color: #333;
+}
+.conteiner-form form button, .backBtn{
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 25px auto;
+    background-color: #ffe41c;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.conteiner-form form .btnText{
+    font-size: 14px;
+    font-weight: 400;
+}
+form button:hover{
+    background-color: #e1c809;
+}
+form button i,
+form .backBtn i{
+    margin: 0 6px;
+}
+form .backBtn i{
+    transform: rotate(180deg);
+}
+form .buttons{
+    display: flex;
+    align-items: center;
+}
+form .buttons button , .backBtn{
+    margin-right: 14px;
+}
+
+@media (max-width: 750px) {
+    .conteiner-form form{
+        overflow-y: scroll;
+    }
+    .conteiner-form form::-webkit-scrollbar{
+       display: none;
+    }
+    form .fields .input-field{
+        width: calc(100% / 2 - 15px);
+    }
+
+    form .fields .input-field_2{
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field{
+        width: 100%;
+    }
+    form .fields .input-field_2{
+        width: 100%;
+    }
+}
