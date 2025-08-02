@@ -1,105 +1,38 @@
-# Define the services that make up your application
 services:
-  # The web application service
   app:
-    # Build the image using the Dockerfile in the current directory
     build:
       context: .
       dockerfile: Dockerfile
-    # Map the current directory to the container's /var/www/html directory
     volumes:
       - .:/var/www/html
-    # Set up environment variables from the .env file
+    # Load the .env file with Supabase credentials
     env_file:
       - .env
-    # Map port 8080 on the host to port 80 in the container
     ports:
       - "8080:80"
-    # This service now depends on the db-init service,
-    # ensuring the database is populated before the app starts.
+    # The app no longer depends on a local DB service
     depends_on:
-      - db-init
-    # Explicitly add this service to the defined network
+      - pgadmin # Optional: Start after pgadmin for convenience
     networks:
       - my-app-network
 
-  # The PostgreSQL database service
-  db:
-    # Use the official postgres image
-    image: postgres:13.6
-    # Set up environment variables for the database using the .env file
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    # Persist database data to a named volume on the host
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    # Expose port 5432 for the database
-    ports:
-      - "5432:5432"
-    # Explicitly add this service to the defined network
-    networks:
-      - my-app-network
-    # Add a health check to ensure the database is ready for connections
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-
-  # This new service runs the pg_restore command to populate the database
-  db-init:
-    # Use the same postgres image to get the pg_restore tool
-    image: postgres:13.6
-    # This service depends on the db service being healthy
-    depends_on:
-      db:
-        condition: service_healthy
-    # Mount the local database dump file into the container
-    volumes:
-      - ./db_dump/bank_new_dump.bak:/Bank_dump
-    # The command to execute. It runs pg_restore.
-    command: >
-      sh -c "pg_restore --host=db --port=5432 --username=postgres --dbname=Bank /Bank_dump"
-    # Set environment variables for the command
-    environment:
-      PGPASSWORD: ${DB_PASSWORD}
-    # This service will exit after running the command
-    restart: "no"
-    # Connect to the same network
-    networks:
-      - my-app-network
-
-  # The pgAdmin service for database management
+  # The pgAdmin service for remote database management
   pgadmin:
-    # Use the official pgAdmin image
     image: dpage/pgadmin4
-    # Set up environment variables for pgAdmin login
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    # Map port 5050 on the host to port 80 in the container
     ports:
       - "5050:80"
-    # This service now depends on the db-init service,
-    # ensuring the database is populated before pgAdmin tries to connect
-    depends_on:
-      - db-init
-    # Set up a named volume for pgAdmin data persistence
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-    # Explicitly add this service to the defined network
     networks:
       - my-app-network
 
-# Define a custom network for all services
 networks:
   my-app-network:
     driver: bridge
 
-# Define named volumes for data persistence
 volumes:
-  postgres_data:
+  # We only need the volume for pgAdmin now
   pgadmin_data:

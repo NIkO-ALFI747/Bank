@@ -1,0 +1,12 @@
+services:
+  db-seed:
+    image: postgres:13.6
+    network_mode: "host"
+    volumes:
+      - ./db_dump/bank_new_dump.bak:/Bank_dump
+    command: >
+      sh -c "pg_restore --host=${DB_HOST} --port=${DB_PORT} --username=${DB_USER} --dbname=${DB_NAME} --no-owner --no-privileges --clean /Bank_dump"
+    env_file:
+      - .env
+    environment:
+      PGPASSWORD: ${DB_PASSWORD}

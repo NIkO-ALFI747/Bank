@@ -16,18 +16,19 @@ if (file_exists(__DIR__ . '/.env')) {
 
 // Get the database connection details from environment variables
 $host = getenv('DB_HOST');
+$port = getenv('DB_PORT');
 $dbname = getenv('DB_NAME');
 $username = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 
 // Check if all necessary environment variables are set
-if (!$host || !$dbname || !$username || !$password) {
+if (!$host || !$dbname || !$username || !$password || !$port) {
     die('Error: Database credentials are not set in environment variables.');
 }
 
 try {
     // Attempt to connect to the database using PDO
-    $db_connect = new PDO("pgsql:host=$host;dbname=$dbname", $username, $password);
+    $db_connect = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $username, $password);
     
     // Set PDO attributes for better error handling
     $db_connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
